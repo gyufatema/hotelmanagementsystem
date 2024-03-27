@@ -1,0 +1,39 @@
+<!-- rating_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Booking</title>
+</head>
+<body>
+    <h2>Rate Your Booking</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Rating</button>
+    </form>
+
+    <h2>Leave a Review</h2>
+    <form method="post" action="{% url 'submit_review' %}">
+        {% csrf_token %}
+        <label for="user">User:</label><br>
+        <input type="text" id="user" name="user"><br><br>
+        
+        <label for="room">Room:</label><br>
+        <select id="room" name="room">
+            {% for room in rooms %}
+                <option value="{{ room.id }}">{{ room.name }}</option>
+            {% endfor %}
+        </select><br><br>
+        
+        <label for="rating">Rating:</label><br>
+        <input type="number" id="rating" name="rating" min="1" max="5"><br><br>
+        
+        <label for="comment">Comment:</label><br>
+        <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br><br>
+        
+        <button type="submit">Submit Review</button>
+    </form>
+</body>
+</html>
