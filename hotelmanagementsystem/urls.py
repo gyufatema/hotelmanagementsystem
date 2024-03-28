@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include,path
 from hotelmanagementsystem import views
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import homepage, news_details, best_hotel, world_tourist_spot, event_management,customer_service, terms_conditions, facilities, contact, aboutus, customer_view, customer_register
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,4 +36,4 @@ urlpatterns = [
     path('customerview/', customer_view, name='Customer'),
     path('customerregister/', customer_register, name='Customer'),
     
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
